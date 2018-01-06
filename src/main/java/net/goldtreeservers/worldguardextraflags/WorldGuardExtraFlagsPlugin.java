@@ -1,7 +1,16 @@
 package net.goldtreeservers.worldguardextraflags;
 
-import java.awt.Color;
-
+import com.earth2me.essentials.Essentials;
+import com.sk89q.worldedit.bukkit.BukkitUtil;
+import com.sk89q.worldedit.bukkit.WorldEditPlugin;
+import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
+import com.sk89q.worldguard.protection.flags.StateFlag.State;
+import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+import lombok.Getter;
+import net.goldtreeservers.worldguardextraflags.flags.handlers.*;
+import net.goldtreeservers.worldguardextraflags.listeners.*;
+import net.goldtreeservers.worldguardextraflags.utils.FlagUtils;
+import net.goldtreeservers.worldguardextraflags.utils.PluginUtils;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -11,38 +20,10 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 
-import com.earth2me.essentials.Essentials;
-import com.sk89q.worldedit.bukkit.BukkitUtil;
-import com.sk89q.worldedit.bukkit.WorldEditPlugin;
-import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
-import com.sk89q.worldguard.protection.flags.StateFlag.State;
-import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+import java.awt.*;
 
-import lombok.Getter;
-import net.goldtreeservers.worldguardextraflags.flags.handlers.BlockedEffectsFlag;
-import net.goldtreeservers.worldguardextraflags.flags.handlers.CommandOnEntryFlag;
-import net.goldtreeservers.worldguardextraflags.flags.handlers.CommandOnExitFlag;
-import net.goldtreeservers.worldguardextraflags.flags.handlers.ConsoleCommandOnEntryFlag;
-import net.goldtreeservers.worldguardextraflags.flags.handlers.ConsoleCommandOnExitFlag;
-import net.goldtreeservers.worldguardextraflags.flags.handlers.FlyFlag;
-import net.goldtreeservers.worldguardextraflags.flags.handlers.GiveEffectsFlag;
-import net.goldtreeservers.worldguardextraflags.flags.handlers.GlideFlag;
-import net.goldtreeservers.worldguardextraflags.flags.handlers.GodmodeFlag;
-import net.goldtreeservers.worldguardextraflags.flags.handlers.PlaySoundsFlag;
-import net.goldtreeservers.worldguardextraflags.flags.handlers.TeleportOnEntryFlag;
-import net.goldtreeservers.worldguardextraflags.flags.handlers.TeleportOnExitFlag;
-import net.goldtreeservers.worldguardextraflags.flags.handlers.WalkSpeedFlag;
-import net.goldtreeservers.worldguardextraflags.listeners.BlockListener;
-import net.goldtreeservers.worldguardextraflags.listeners.EntityListener;
-import net.goldtreeservers.worldguardextraflags.listeners.EntityListenerOnePointNine;
-import net.goldtreeservers.worldguardextraflags.listeners.EssentialsListener;
-import net.goldtreeservers.worldguardextraflags.listeners.PlayerListener;
-import net.goldtreeservers.worldguardextraflags.listeners.WorldEditListener;
-import net.goldtreeservers.worldguardextraflags.listeners.WorldListener;
-import net.goldtreeservers.worldguardextraflags.utils.FlagUtils;
-import net.goldtreeservers.worldguardextraflags.utils.PluginUtils;
-
-public class WorldGuardExtraFlagsPlugin extends JavaPlugin
+public class
+WorldGuardExtraFlagsPlugin extends JavaPlugin
 {
 	@Getter private static WorldGuardExtraFlagsPlugin plugin;
 	@Getter private static WorldGuardPlugin worldGuardPlugin;
@@ -199,7 +180,7 @@ public class WorldGuardExtraFlagsPlugin extends JavaPlugin
 			if (region.getFlag(FlagUtils.CHUNK_UNLOAD) == State.DENY)
 			{
 				WorldGuardExtraFlagsPlugin.getPlugin().getLogger().info("Loading chunks for region " + region.getId() + " located in " + world.getName() + " due to chunk-unload flag being deny");
-				
+
 				Location min = BukkitUtil.toLocation(world, region.getMinimumPoint());
 				Location max = BukkitUtil.toLocation(world, region.getMaximumPoint());
 
@@ -213,4 +194,5 @@ public class WorldGuardExtraFlagsPlugin extends JavaPlugin
 			}
 		}
 	}
+
 }

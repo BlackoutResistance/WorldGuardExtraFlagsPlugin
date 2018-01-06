@@ -1,7 +1,16 @@
 package net.goldtreeservers.worldguardextraflags.listeners;
 
-import java.util.List;
-
+import com.sk89q.worldedit.Location;
+import com.sk89q.worldedit.bukkit.BukkitUtil;
+import com.sk89q.worldguard.protection.ApplicableRegionSet;
+import com.sk89q.worldguard.protection.flags.StateFlag.State;
+import io.lumine.xikage.mythicmobs.mobs.EggManager;
+import io.lumine.xikage.mythicmobs.mobs.MythicMob;
+import net.goldtreeservers.worldguardextraflags.WorldGuardExtraFlagsPlugin;
+import net.goldtreeservers.worldguardextraflags.flags.handlers.FlyFlag;
+import net.goldtreeservers.worldguardextraflags.flags.handlers.GiveEffectsFlag;
+import net.goldtreeservers.worldguardextraflags.utils.FlagUtils;
+import net.goldtreeservers.worldguardextraflags.utils.WorldGuardUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -12,15 +21,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
-import org.bukkit.event.player.PlayerChangedWorldEvent;
-import org.bukkit.event.player.PlayerGameModeChangeEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerItemConsumeEvent;
-import org.bukkit.event.player.PlayerItemDamageEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerRespawnEvent;
-import org.bukkit.event.player.PlayerTeleportEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
@@ -28,18 +29,7 @@ import org.bukkit.potion.Potion;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.spigotmc.event.player.PlayerSpawnLocationEvent;
 
-import com.sk89q.worldedit.Location;
-import com.sk89q.worldedit.bukkit.BukkitUtil;
-import com.sk89q.worldguard.protection.ApplicableRegionSet;
-import com.sk89q.worldguard.protection.flags.StateFlag.State;
-
-import net.elseland.xikage.MythicMobs.Mobs.EggManager;
-import net.elseland.xikage.MythicMobs.Mobs.MythicMob;
-import net.goldtreeservers.worldguardextraflags.WorldGuardExtraFlagsPlugin;
-import net.goldtreeservers.worldguardextraflags.flags.handlers.FlyFlag;
-import net.goldtreeservers.worldguardextraflags.flags.handlers.GiveEffectsFlag;
-import net.goldtreeservers.worldguardextraflags.utils.FlagUtils;
-import net.goldtreeservers.worldguardextraflags.utils.WorldGuardUtils;
+import java.util.List;
 
 @SuppressWarnings("deprecation")
 public class PlayerListener implements Listener
